@@ -13,7 +13,7 @@ const range = (min, max, value, def) => {
   return Number(value);
 };
 
-process.title = 'raspi-live';
+process.title = 'camerartsptohls';
 
 program
   .name(info.name)
@@ -21,10 +21,9 @@ program
   .version(info.version, '-v, --version');
 
 program
-  .command('start')
-  .description('start streaming video from the raspberry pi camera module')
-  .option('-d, --directory <directory>', 'streaming video file hosting location', `${os.homedir()}/camera`)
-  .option('-f, --format <format>', 'video streaming format [hls, dash]', /^(hls|dash)$/i, 'hls')
+  .command('start'):
+  .description('start streaming video from the CCTV ')
+  .option('-i, --rtsp <rtsp link ip >', 'streaming video from rtsp cctv h264')
   .option('-w, --width <width>', 'video resolution width', Number, 1280)
   .option('-h, --height <height>', 'video resolution height', Number, 720)
   .option('-r, --framerate <fps>', 'video frames per second', Number, 25)
@@ -34,10 +33,10 @@ program
   .option('-t, --time <time>', 'duration of streaming files', Number, 2)
   .option('-l, --list-size <list-size>', 'number of streaming files in the playlist', Number, 10)
   .option('-s, --storage-size <storage-size>', 'number of streaming files for storage purposes', Number, 10)
-  .option('-p, --port <port>', 'port number the server runs on', Number, 8080)
-  .action(({ directory, format, width, height, framerate, horizontalFlip = false, verticalFlip = false, compressionLevel, time, listSize, storageSize, port }) => {
+  .option('-p, --port <port>', 'port number the server runs on', Number, 8888)
+  .action(({ rtsp,width, height, framerate, horizontalFlip = false, verticalFlip = false, compressionLevel, time, listSize, storageSize, port }) => {
     console.log('configuration:', directory, format, width, height, framerate, horizontalFlip, verticalFlip, compressionLevel, time, listSize, storageSize, port);
-    server(directory, format, width, height, framerate, horizontalFlip, verticalFlip, compressionLevel, time, listSize, storageSize, port);
+    server(rtsp, width, height, framerate, horizontalFlip, verticalFlip, compressionLevel, time, listSize, storageSize, port);
   });
 
 program.parse(process.argv);
