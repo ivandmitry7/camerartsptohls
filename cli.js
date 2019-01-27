@@ -24,7 +24,7 @@ program
   .command('start'):
   .description('start streaming video from the CCTV ')
   .option('-i, --rtsp <rtsp link ip >', 'streaming video from rtsp cctv h264')
-  .option('-d, --folder <folder save video >', 'Folder save video')
+  .option('-d, --directory <directory folder save video >', 'Folder save video')
   .option('-w, --width <width>', 'video resolution width', Number, 1280)
   .option('-h, --height <height>', 'video resolution height', Number, 720)
   .option('-r, --framerate <fps>', 'video frames per second', Number, 25)
@@ -33,9 +33,9 @@ program
   .option('-l, --list-size <list-size>', 'number of streaming files in the playlist', Number, 10)
   .option('-s, --storage-size <storage-size>', 'number of streaming files for storage purposes', Number, 10)
   .option('-p, --port <port>', 'port number the server runs on', Number, 8888)
-  .action(({ rtsp , drice,width, height, framerate,compressionLevel, time, listSize, storageSize, port }) => {
-    console.log('configuration:'rtsp, width, height, framerate, compressionLevel, time, listSize, storageSize, port);
-    server(rtsp, width, height, framerate, compressionLevel, time, listSize, storageSize, port);
+  .action(({ rtsp ,directory , drice,width, height, framerate,compressionLevel, time, listSize, storageSize, port }) => {
+    console.log('configuration:'rtsp ,directory, width, height, framerate, compressionLevel, time, listSize, storageSize, port);
+    server(rtsp,directory, width, height, framerate, compressionLevel, time, listSize, storageSize, port);
   });
 
 program.parse(process.argv);
